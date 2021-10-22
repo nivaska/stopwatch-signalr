@@ -4,6 +4,7 @@ import * as signalR from "@microsoft/signalr";
 const btnStart: HTMLButtonElement = document.querySelector("#btnStart");
 const btnStop: HTMLButtonElement = document.querySelector("#btnStop");
 const lblError: HTMLLabelElement = document.querySelector("#lblError");
+const lblStatus: HTMLLabelElement = document.querySelector("#lblStatus");
 const textMinutes: HTMLHeadingElement = document.querySelector("#valueMin");
 const textSeconds: HTMLHeadingElement = document.querySelector("#valueSec");
 
@@ -15,14 +16,15 @@ connection.on("updateTimerState", (status: string, elapsedTime: string) => {
     function pad(n: number): string {
         return (n < 10) ? ("0" + n) : n.toString();
     }
-
+    lblStatus.innerText = status;
     textMinutes.innerText = pad(Math.trunc(parseInt(elapsedTime) / 60));
     textSeconds.innerText = pad(parseInt(elapsedTime) % 60);
     updateButtonStatus(status);
 });
 
 connection.on("alertError", (message: string) => {
-    lblError.innerHTML = message;
+    lblError.innerText = message;
+    lblStatus.innerText = "Error Occured";
 });
 
 connection.start().catch(err => lblError.innerHTML = err);

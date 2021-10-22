@@ -7,11 +7,13 @@ I chose SignalR over gRPC for RPC communication. As the app required periodic br
 
 ### From the output folder
 
-The server can be started by running the "StopWatchApp.exe" available in the [dist](dist) folder. Once the server is started, the web client can be launched in the browser via the url <https://localhost:5001/><br>
-
 **Requirements:** .Net Core 3.1
 
+The server can be started by running the "StopWatchApp.exe" available in the [dist](dist) folder. Once the server is started, the web client can be launched in the browser via the url <https://localhost:5001/><br>
+
 ### From the source code
+
+**Requirements:** .Net Core 3.1, Node + NPM
 
 - To build and run the source code from an IDE, necessary node packages must be installed by running the npm install command from the src directory.
 ```
@@ -25,4 +27,3 @@ npm run release
 
 - Start the server app in Debug or Release mode in the IDE and launch open the url <https://localhost:5001/> in the browser.
 
-**Requirements:** .Net Core 3.1, Node + NPM

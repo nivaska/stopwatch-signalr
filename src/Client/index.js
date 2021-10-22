@@ -5,6 +5,7 @@ var signalR = require("@microsoft/signalr");
 var btnStart = document.querySelector("#btnStart");
 var btnStop = document.querySelector("#btnStop");
 var lblError = document.querySelector("#lblError");
+var lblStatus = document.querySelector("#lblStatus");
 var textMinutes = document.querySelector("#valueMin");
 var textSeconds = document.querySelector("#valueSec");
 var connection = new signalR.HubConnectionBuilder()
@@ -14,12 +15,14 @@ connection.on("updateTimerState", function (status, elapsedTime) {
     function pad(n) {
         return (n < 10) ? ("0" + n) : n.toString();
     }
+    lblStatus.innerText = status;
     textMinutes.innerText = pad(Math.trunc(parseInt(elapsedTime) / 60));
     textSeconds.innerText = pad(parseInt(elapsedTime) % 60);
     updateButtonStatus(status);
 });
 connection.on("alertError", function (message) {
-    lblError.innerHTML = message;
+    lblError.innerText = message;
+    lblStatus.innerText = "Error Occured";
 });
 connection.start().catch(function (err) { return lblError.innerHTML = err; });
 btnStart.addEventListener("click", startTimer);
