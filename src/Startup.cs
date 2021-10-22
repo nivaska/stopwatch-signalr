@@ -37,7 +37,6 @@ namespace StopWatchApp
                 app.UseExceptionHandler("/Error");
             }
 
-            app.UseHttpsRedirection();
             app.UseFileServer();
             app.UseRouting();
 
