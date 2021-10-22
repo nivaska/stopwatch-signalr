@@ -4,6 +4,9 @@ using System.Threading;
 
 namespace StopWatchApp.Services
 {
+    /// <summary>
+    /// The Stopwatch Class
+    /// </summary>
     public class StopWatch
     {
         private Timer _timer;
@@ -17,6 +20,9 @@ namespace StopWatchApp.Services
             _timerStatus = TimerStatus.Stopped;
         }
 
+        /// <summary>
+        /// Start the Stopwatch
+        /// </summary>
         public void Start()
         {
             if (_timerStatus == TimerStatus.Running)
@@ -26,6 +32,9 @@ namespace StopWatchApp.Services
             _timer = new Timer(UpdateStopwatch, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
         }
 
+        /// <summary>
+        /// Stop the Stopwatch
+        /// </summary>
         public void Stop()
         {
             if (_timer != null)
@@ -36,6 +45,10 @@ namespace StopWatchApp.Services
             }
         }
 
+        /// <summary>
+        /// Update timer status and elapsed time whenver the timer is updated
+        /// </summary>
+        /// <param name="state"></param>
         private void UpdateStopwatch(object state)
         {
             _elapsedTime++;

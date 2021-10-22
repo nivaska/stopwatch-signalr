@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace StopWatchApp.Services
 {
+    /// <summary>
+    /// StopWatchService manages the Timer on the server and broadcasts timer udates to signalr clients
+    /// </summary>
     public class StopWatchService: IStopWatchService
     {
         private readonly IHubContext<StopWatchHub, IStopWatchHub> _hubContext;
@@ -22,6 +25,9 @@ namespace StopWatchApp.Services
             _stopwatch.TimerUpdateEvent += Stopwatch_TimerUpdateEvent; 
         }
 
+        /// <summary>
+        /// Start the timer
+        /// </summary>
         public void StartTimer()
         {
             try
@@ -34,6 +40,9 @@ namespace StopWatchApp.Services
             }
         }
 
+        /// <summary>
+        /// Stop the timer
+        /// </summary>
         public void StopTimer()
         {
             try
@@ -46,11 +55,20 @@ namespace StopWatchApp.Services
             }
         }
 
+        /// <summary>
+        /// Event handler for TimerUpdateEvent - broadcasts updates to all the clients 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Stopwatch_TimerUpdateEvent(object sender, TimerUpdateArgs e)
         {
             this._hubContext.Clients.All.UpdateTimerState(e.Status.ToString(), e.ElapsedTIme.ToString());
         }
 
+        /// <summary>
+        /// Broadcasts error messages to all the clients 
+        /// </summary>
+        /// <param name="message"></param>
         private void BroadcastErrorMessage(string message)
         {
             this._hubContext.Clients.All.AlertError(message);

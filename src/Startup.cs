@@ -22,6 +22,8 @@ namespace StopWatchApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSignalR();
+
+            // configuring StopWatchService as a singleton srvice to ensure only a single instance of timer is maintained on the server
             services.AddSingleton<IStopWatchService, StopWatchService>();
         }
 

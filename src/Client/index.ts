@@ -12,6 +12,7 @@ const connection = new signalR.HubConnectionBuilder()
     .withUrl("/hub")
     .build();
 
+// updateTimerState - singalr client method
 connection.on("updateTimerState", (status: string, elapsedTime: string) => {
     function pad(n: number): string {
         return (n < 10) ? ("0" + n) : n.toString();
@@ -22,26 +23,32 @@ connection.on("updateTimerState", (status: string, elapsedTime: string) => {
     updateButtonStatus(status);
 });
 
+// alertError - singalr client method
 connection.on("alertError", (message: string) => {
     lblError.innerText = message;
     lblStatus.innerText = "Error Occured";
 });
 
+// start singalr connection
 connection.start().catch(err => lblError.innerHTML = err);
 
+// attach event handlers to buttons
 btnStart.addEventListener("click", startTimer);
 btnStop.addEventListener("click", stopTimer);
 
+// event handler for Start button
 function startTimer() {
     connection.send("startTimer")
         .then(() => updateButtonStatus("Running"));
 }
 
+// event handler for Stop button
 function stopTimer() {
     connection.send("stopTimer")
         .then(() => updateButtonStatus("Stopped"));
 }
 
+// update button states (active or disabled) depeding upon the status
 function updateButtonStatus(status: string) {
     switch (status) {
         case "Running":

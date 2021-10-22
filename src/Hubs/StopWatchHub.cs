@@ -3,6 +3,9 @@ using StopWatchApp.Models;
 
 namespace StopWatchApp.Hubs
 {
+    /// <summary>
+    /// SignalR Hub to control the StopWatch timer
+    /// </summary>
     public class StopWatchHub : Hub<IStopWatchHub>
     {
         IStopWatchService _stopWatchService;
