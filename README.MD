@@ -1,7 +1,4 @@
-The application was built on .Net Core 3.1 as a ASP .Net Core Webapp.
-
-I chose SignalR over gRPC for RPC communication. As the app required periodic broadcasts from the Server which is supported out of the box by SignalR, it seemed to be the better choice.<br>
- 
+A simple SIgnalR basede Stopwatch Timer built ASP .Net Core.<br>
 
 ## Run/Build Instructions
 
