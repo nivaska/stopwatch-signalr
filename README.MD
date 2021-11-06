@@ -1,4 +1,4 @@
-A simple SIgnalR basede Stopwatch Timer built ASP .Net Core.<br>
+A simple SignalR based Stopwatch Timer built on ASP .Net Core.<br>
 
 ## Run/Build Instructions
 
